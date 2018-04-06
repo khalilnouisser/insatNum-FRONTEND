@@ -1,0 +1,143 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Ajouter un materiel</h4>
+            <div class="table-responsive">
+              <form method="get" action="/" class="form-horizontal">
+                <div class="row">
+                  <label class="col-sm-2 label-on-left">Nom</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label"></label>
+                      <input type="text" name="ename" class="form-control" [(ngModel)]="equipement.name" >
+                      <span class="help-block"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 label-on-left">Ref</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label"></label>
+                      <input type="text" name="ref" class="form-control" [(ngModel)]="equipement.ref">
+                      <span class="help-block"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 label-on-left">prix</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label"></label>
+                      <input type="text" name="prix" class="form-control" [(ngModel)]="equipement.price">
+                      <span class="help-block"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 label-on-left">État</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label"></label>
+                      <select name="status" id="status" [(ngModel)]="equipement.currentStatus">
+                        <option value="0">Nouveau</option>
+                        <option value="1">Peu utilisé</option>
+                        <option value="2">Usage Moyen</option>
+                        <option value="3">Mediocre</option>
+                      </select>
+                      <span class="help-block"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 label-on-left">Ajouté par</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <div class="radio" (click)="type=0">
+                        <label>
+                          <input type="radio" name="optionsRadios" checked="true"> Inconnu
+                        </label>
+                      </div>
+                      <div class="radio" (click)="type=1">
+                        <label>
+                          <input type="radio" name="optionsRadios" > Deja exsite
+                        </label>
+                      </div>
+                      <div class="radio" (click)="type=2">
+                        <label>
+                          <input type="radio" name="optionsRadios"> Nouveau
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="type == 1">
+                  <label class="col-sm-2 label-on-left">Membre</label>
+                  <div class="col-sm-10">
+                    <div class="form-group label-floating is-empty">
+                      <label class="control-label"></label>
+                      <select name="user" id="user" [(ngModel)]="equipement.addBy.id">
+                        <option value="0">Inconnu</option>
+                        <option *ngFor="let user of listUsers" value="{{user.id}}">{{user.name}} {{user.lName}} ({{user.team}})</option>
+                      </select>
+                      <span class="help-block"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="type == 2">
+                  <label class="col-sm-2 label-on-left">Membre</label>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group label-floating is-empty">
+                          <label class="control-label"></label>
+                          <input type="text" class="form-control"name="lName"   [(ngModel)]="equipement.addBy.lName" placeholder="Nom">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group label-floating is-empty">
+                          <label class="control-label"></label>
+                          <input type="text" class="form-control" name="name"  [(ngModel)]="equipement.addBy.name" placeholder="Prenom">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" >
+                      <div class="col-md-12">
+                        <div class="form-group label-floating is-empty">
+                          <label class="control-label"></label>
+                          <input type="text" class="form-control" name="team" [(ngModel)]="equipement.addBy.team" placeholder="Equipe">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group label-floating is-empty">
+                          <label class="control-label"></label>
+                          <select [(ngModel)]="equipement.addBy.job" name="job">
+                                <option value="0">Responsable</option>
+                                <option value="1">Membre</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="display: flex;align-items: center;align-content: center">
+        <button type="button" class="btn btn-rose btn-fill btn-wd" style="width: 200px;margin: auto" (click)="sendRequest()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>

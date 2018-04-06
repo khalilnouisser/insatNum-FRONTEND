@@ -1,0 +1,49 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Demande du materiels</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let header of tableData1.headerRow">
+                    <span>{{ header }}</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of list;let i=index">
+                  <td>
+                      {{item.request}}
+                  </td>
+                  <td>
+                    {{item.quantity}}
+                  </td>
+                  <td style="width: 400px;">
+                    <div *ngFor="let sh of item.shifting;let i=index" style="display: flex;align-content: center;align-items: center">
+                      <p style="width: 30px; font-size: 16px;">{{i}} :</p>
+                      <select name="item{{item.request}}{{sh}}" [(ngModel)]="item.shifting[i]">
+                        <option disabled selected>Choisir un materiel</option>
+                        <option *ngFor="let o of item.propositions" value="{{o.id}}">{{o.name}} - {{o.ref}}</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="display: flex;align-items: center;align-content: center">
+        <button type="button" class="btn btn-rose btn-fill btn-wd" style="width: 200px;margin: auto" (click)="sendRequest()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>

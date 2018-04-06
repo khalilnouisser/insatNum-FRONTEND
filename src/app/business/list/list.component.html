@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td>Id</td>
+    <td>Nom</td>
+    <td>image</td>
+  </tr>
+  <tr *ngFor="let elm of list">
+    <td>{{elm.id}}</td>
+    <td>{{elm.title}}</td>
+    <td><img [src]="elm.image" /></td>
+  </tr>
+</table>

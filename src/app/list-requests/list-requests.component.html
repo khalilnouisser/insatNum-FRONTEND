@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">List des demandes</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let header of tableData1.headerRow">
+                    <span *ngIf="header!='Actions'">{{ header }}</span>
+                    <div *ngIf="header=='Actions'" style="text-align: center">{{ header }}</div>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of list;let i=index">
+                  <td>
+                    <span *ngFor="let eq of item.equipmentsQuantities;let i=index">{{eq.quantity}} x {{eq.equipment}} <span *ngIf="i<list.length-1"> , </span></span>
+                  </td>
+                  <td>{{item.user.name}} {{item.user.lName}} ( {{item.user.team}} )</td>
+                  <td>{{item.date.substr(0,10)}}</td>
+                  <td>
+                    <p *ngIf="item.status==0" class="state orange-state">Nouveau</p>
+                    <p *ngIf="item.status==1" class="state green-state " style="width: 100px">Accepté</p>
+                    <p *ngIf="item.status==2" class="state red-state" style="width: 100px">Réfusé</p>
+                    <p *ngIf="item.status==3" class="state orange-state" style="background: #2da12e">Retourné</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <div *ngIf="item.status == 1">
+                      <button *ngIf="item.shiftings.length > 0" type="button" rel="tooltip" class="btn btn-info" style="width: 132px">
+                        Retourner
+                      </button>
+                      <button *ngIf="item.shiftings.length == 0" type="button" rel="tooltip" class="btn btn-info" style="width: 132px">
+                        Donner
+                      </button>
+                    </div>
+                    <div *ngIf="item.status == 0">
+                      <button type="button" rel="tooltip" class="btn btn-success" (click)="accept(item.id,i)">
+                        Accepter
+                      </button>
+                      <button type="button" rel="tooltip" class="btn btn-danger" (click)="refuse(item.id,i)">
+                        Réfuser
+                      </button>
+                    </div>
+
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

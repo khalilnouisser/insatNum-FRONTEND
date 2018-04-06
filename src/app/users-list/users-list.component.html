@@ -1,0 +1,69 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Nos matériaux</h4>
+            <div class="table-responsive">
+              <button type="button" rel="tooltip" class="btn btn-info" style="position: absolute;top: 0;right: 10px;" [routerLink]="['/equipment/add']">
+                Ajouter un Materiel
+              </button>
+              <form class="navbar-form navbar-right" role="search" style="position: absolute;right: 220px;top: -20px;">
+                <div class="form-group form-search is-empty">
+                  <input name="keyword" class="form-control" placeholder="Search ... " [(ngModel)]="keyword" type="text">
+                  <span class="material-input"></span>
+                  <span class="material-input"></span></div>
+                <button class="btn btn-white btn-round btn-just-icon" type="submit" [routerLink]="['/equipments',keyword]">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+              </form>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let header of tableData1.headerRow">
+                    <span *ngIf="header!='Actions'">{{ header }}</span>
+                    <div *ngIf="header=='Actions'" style="text-align: center">{{ header }}</div>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of list;let i=index">
+                  <td>{{item.name}} {{item.lName}}</td>
+                  <td>{{item.team}} <span *ngIf="item.job == 0" style="width: 70px;border: #333333 solid 1px;color: #333333">(Responsable)</span></td>
+                  <td>
+                    <p class="state green-state" *ngIf="item.discriminator == 'Person'">Membre</p>
+                    <p class="state dark-green-state " *ngIf="item.discriminator == 'User'" >Utilisateur</p>
+                    <p class="state orange-state" *ngIf="item.discriminator == 'EquipmentChief'">Responsable Stock</p>
+                    <p class="state red-state" *ngIf="item.discriminator == 'Admin'">Administrateur</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" class="btn btn-info" [routerLink]="['/history',item.id]">
+                      Historique
+                    </button>
+                    <button type="button" rel="tooltip" class="btn btn-success" [routerLink]="['/equipment/edit/',item.id]">
+                      <i class="material-icons">edit</i>
+                    </button>
+                    <button type="button" rel="tooltip" class="btn btn-danger" (click)="removeProduct(i)">
+                      <i class="material-icons">close</i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="td-actions text-right">
+                <button *ngFor="let page of pages" (click)="goToPage(page)" rel="tooltip" type="button" class="btn btn-info btn-round">
+                  {{page}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

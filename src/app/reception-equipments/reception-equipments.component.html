@@ -1,0 +1,48 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Retour des materiels</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let header of tableData1.headerRow">
+                    <span>{{ header }}</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of requestE.shiftings;let i=index">
+                  <td>
+                    {{item.equipment.name}}
+                  </td>
+                  <td>
+                    {{item.equipment.ref}}
+                  </td>
+                  <td style="width: 400px;">
+                    <select [(ngModel)]="item.status">
+                        <option value="0" *ngIf="item.equipment.currentStatus==0">Nouveau</option>
+                        <option value="1" *ngIf="item.equipment.currentStatus<=1">Peu utilisé</option>
+                        <option value="2" *ngIf="item.equipment.currentStatus<=2">Usage Moyen</option>
+                        <option value="3">Mediocre</option>
+                    </select>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="display: flex;align-items: center;align-content: center">
+        <button type="button" class="btn btn-rose btn-fill btn-wd" style="width: 200px;margin: auto" (click)="sendRequest()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
